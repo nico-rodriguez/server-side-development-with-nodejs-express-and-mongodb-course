@@ -36,3 +36,19 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts, (payload, done) => {
 }));
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});
+
+exports.verifyAdmin = (req, _res, next) => {
+  if (req.user != null) {
+    if (req.user.admin === true) {
+      next();
+    } else {
+      const err = new Error('You are not authorized to perform this operation!');
+      err.status = 403;
+      return next(err);
+    }
+  } else {
+    const err = new Error('You must log in first!');
+      err.status = 403;
+      return next(err);
+  }
+};
