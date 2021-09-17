@@ -28,6 +28,6 @@ const leaderSchema = new Schema({
   }
 })
 
-let Leaders = mongoose.model('leader', leaderSchema);
+const Leaders = mongoose.model('leader', leaderSchema);
 
 module.exports = Leaders;

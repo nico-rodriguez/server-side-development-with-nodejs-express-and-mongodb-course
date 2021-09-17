@@ -1,10 +1,10 @@
-var passport = require('passport');
-var User = require('./models/user');
-var JwtStrategy = require('passport-jwt').Strategy;
-var ExtractJwt = require('passport-jwt').ExtractJwt;
-var jwt = require('jsonwebtoken');
+const passport = require('passport');
+const User = require('./models/user');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
 
-var config = require('./config');
+const config = require('./config');
 
 
 passport.use(User.createStrategy());
@@ -18,7 +18,7 @@ exports.getToken = user => {
   });
 };
 
-var opts = {};
+const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = config.secretKey;
 

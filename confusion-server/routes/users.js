@@ -1,12 +1,12 @@
-var express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
-var passport = require('passport');
+const passport = require('passport');
 
-var User = require('../models/user');
-var authenticate = require('../authenticate');
+const User = require('../models/user');
+const authenticate = require('../authenticate');
 
 
-var usersRouter = express.Router();
+const usersRouter = express.Router();
 usersRouter.use(bodyParser.json());
 
 /* GET users listing. */
@@ -30,7 +30,7 @@ usersRouter.post('/signup', function(req, res, next) {
       user.lastname = req.body.lastname;
     }
     user.save()
-    .then(_user => {
+    .then(user => {
       passport.authenticate('local')(req, res, () => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -46,7 +46,7 @@ usersRouter.post('/signup', function(req, res, next) {
 });
 
 usersRouter.post('/login', passport.authenticate('local'), function(req, res) {
-  var token = authenticate.getToken({_id: req.user._id});
+  const token = authenticate.getToken({_id: req.user._id});
 
   console.log(token);
   res.statusCode = 200;

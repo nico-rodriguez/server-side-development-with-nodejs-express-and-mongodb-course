@@ -1,18 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var passport = require('passport');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
 
-var authenticate = require('./authenticate');
-var config = require('./config');
+const authenticate = require('./authenticate');
+const config = require('./config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var dishRouter = require('./routes/dishRouter');
-var leaderRouter = require('./routes/leaderRouter');
-var promoRouter = require('./routes/promoRouter');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const dishRouter = require('./routes/dishRouter');
+const leaderRouter = require('./routes/leaderRouter');
+const promoRouter = require('./routes/promoRouter');
 
 const mongoose = require('mongoose');
 
@@ -26,7 +26,15 @@ connect.then((db) => {
   console.error(err);
 });
 
-var app = express();
+const app = express();
+
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next();
+  } else {
+    res.redirect(307, `https://${req.hostname}:${app.get("secPort")}${req.url}`)
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
