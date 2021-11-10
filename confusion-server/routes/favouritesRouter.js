@@ -108,7 +108,12 @@ favouritesRouter.route('/:dishId')
     .then(favourites => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json(favourites);
+
+      if (favourites) {
+        res.json({"exists": false, "favourites": favourites});
+      } else {
+        res.json({"exists": true, "favourites": favourites});
+      }
     })
     .catch(err => next(err));
   })
