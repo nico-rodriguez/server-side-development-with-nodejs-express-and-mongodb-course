@@ -108,6 +108,7 @@ dishRouter.route('/:dishId/comments')
     .then(dish => {
       if (dish != null) {
         req.body.author = req.user._id;
+        req.body.date = new Date().toISOString();
         dish.comments.push(req.body);
         dish.save()
         .then(dish => {

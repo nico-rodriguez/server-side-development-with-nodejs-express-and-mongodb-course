@@ -10,8 +10,6 @@ const cors = require('./cors');
 const usersRouter = express.Router();
 usersRouter.use(bodyParser.json());
 
-usersRouter.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200) });
-
 usersRouter.options('*', cors.corsWithOptions, (req, res) => res.sendStatus(200));
 
 /* GET users listing. */
