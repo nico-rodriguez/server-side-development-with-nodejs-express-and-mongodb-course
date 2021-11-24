@@ -85,8 +85,10 @@ favoritesRouter.route('/:dishId')
     dishExists(req.params.dishId)
     .then(dishExists => {
       if (dishExists) {
-        Favorites.updateOne({ user: req.user._id },
-          { $addToSet: { dishes: req.params.dishId } })
+        Favorites.findOneAndUpdate({ user: req.user._id },
+          { $addToSet: { dishes: req.params.dishId } }, {new: true})
+        .populate('user')
+        .populate('dishes')
         .then(favorites => {
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
