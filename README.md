@@ -1,9 +1,4 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
-<h3 align="center">Server Side Development with NodeJS and MongoDB Course</h3>
+<h1 align="center">Server Side Development with NodeJS and MongoDB Course</h1>
 
 <div align="center">
 
@@ -17,57 +12,29 @@
     <br> 
 </p>
 
-## 📝 Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
-
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+This project features several little examples:
 
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
+- A basic `node` `http` web server in `node-http/`.
+- An `express` version of the same server in `node-express/`.
+- A local `mongodb` in `mongodb/`.
+- A `node` server which communicates directly with the `mongodb` through a `mongo client` in `node-mongo/`.
+- Another version of the previous one, but using `mongoose` in `node-mongoose`.
+- A more complex `node` server which communicates to the local `mongodb` and exposes an API for fetching and saving data related to a restaurant. This backend is open at two ports: 3000 and 3443. The port 3000 is insecure (over `http`) and redirects to the 3443 port, which is secure (`https` server with self-signed certificate).
+- Finally, another version of the previous backend, bootstrapped using `loopback`.
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+All applications can be run with `npm start` (previous `npm install` for installing the dependencies).
 
-## 🚀 Deployment <a name = "deployment"></a>
+For all the applications related to the `mongodb`, the local database must be running in parallel:
 
-Add additional notes about how to deploy this on a live system.
+```bash
+mongod --dbpath=mongodb --bind_ip 127.0.0.1
+```
+
+And then start the application with `npm start`.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -82,9 +49,3 @@ Add additional notes about how to deploy this on a live system.
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - Coursera's course *Server Side Development with NodeJS and MongoDB Course*.
-
-``` bash
-openssl genrsa 1024 > private.key
-openssl req -new -key private.key -out cert.csr
-openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
-```
